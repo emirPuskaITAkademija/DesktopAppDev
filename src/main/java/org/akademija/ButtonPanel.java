@@ -43,7 +43,7 @@ public class ButtonPanel extends JPanel {
 
     private ImageIcon createIcon(String urlPath){
         //Class clazz = ButtonPanel.class;
-        URL imageUrl = ButtonPanel.class.getResource(urlPath);
+        URL imageUrl = ButtonPanel.class.getClassLoader().getResource(urlPath);
         if(imageUrl == null){
             System.err.println("Nema jarane na ovom url pathu nista");
             return null;
