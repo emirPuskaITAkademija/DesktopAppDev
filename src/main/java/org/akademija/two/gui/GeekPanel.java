@@ -3,6 +3,8 @@ package org.akademija.two.gui;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 public class GeekPanel extends JPanel {
 
@@ -38,14 +40,16 @@ public class GeekPanel extends JPanel {
         setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
     }
 
+    /**
+     * Ko može startati funkciju ispod ?
+     * <li>
+     *     Uzajamno povezani check box ?
+     *     chinCheckBox  ->   c
+     *
+     * </li>
+     * @param e
+     */
     private void onCheckBoxCheckChange(ActionEvent e){
-//        JCheckBox checkBox = (JCheckBox) e.getSource();
-//        if(checkBox == chinCheckBox){
-//
-//        }else if(checkBox == glassesCheckBox) {
-//
-//        }
-
         char chinChar = chinCheckBox.isSelected()?'c':'-';
         char glasssesChar = glassesCheckBox.isSelected() ? 'g':'-';
         char hairChar = hairCheckBox.isSelected() ? 'h':'-';

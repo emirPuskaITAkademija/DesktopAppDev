@@ -1,27 +1,20 @@
-package org.akademija.two.gui;
+package org.akademija.three;
 
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * Dva thread:
- * <li>1. main</li>
- * <li>2. UI thread </li>
- */
 public class GeekMain {
     public static void main(String[] args) {
-       // Runnable runnable = GeekMain::createAndShowGUI;
         SwingUtilities.invokeLater(GeekMain::createAndShowGUI);
     }
 
-    static void createAndShowGUI(){
-        JFrame frame = new JFrame("Geek for geeks");
+    private static void createAndShowGUI(){
+        JFrame frame = new JFrame();
+        frame.setTitle("Geek Panel with Item Listener");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        //frame.setSize(new Dimension(400, 300));
-        frame.setMinimumSize(new Dimension(400, 300));
         JPanel geekPanel = new GeekPanel();
-
         frame.setContentPane(geekPanel);
+        frame.setMinimumSize(new Dimension(500, 400));
         frame.setVisible(true);
     }
 }
