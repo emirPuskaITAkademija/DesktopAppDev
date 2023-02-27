@@ -6,8 +6,14 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * Kolone i redove: konstrukcija JTable
+ * String[]
+ * Object[][] data
+ */
 public class TablePanel extends JPanel {
 
+    //Java SE JTable
     private String[] columnNames = {"Name", "Surname", "Sport", " # godina", "Vegetarijanac"};
     private Object[][] data = {
             {"Mirsad", "Škandro", "Skijanje", 23, true},

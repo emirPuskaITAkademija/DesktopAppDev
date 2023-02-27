@@ -34,14 +34,14 @@ public class ComboBoxDemo {
         frame.setTitle("Demo ComboBox");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-//        ComboBoxPanel comboBoxPanel = new ComboBoxPanel();
-//        ComboBoxPanel2 comboBoxPanel2 = new ComboBoxPanel2();
+        ComboBoxPanel comboBoxPanel = new ComboBoxPanel();
+        ComboBoxPanel2 comboBoxPanel2 = new ComboBoxPanel2();
         ComboBoxPanel3 comboBoxPanel3 = new ComboBoxPanel3();
         JPanel horizontalPanel = new JPanel();
-       // horizontalPanel.add(comboBoxPanel);
-        //horizontalPanel.add(comboBoxPanel2);
+        horizontalPanel.add(comboBoxPanel);
+        horizontalPanel.add(comboBoxPanel2);
         horizontalPanel.add(comboBoxPanel3);
-        frame.setContentPane(comboBoxPanel3);
+        frame.setContentPane(horizontalPanel);
 
         frame.pack();
         frame.setVisible(true);

@@ -7,6 +7,10 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
 import java.awt.*;
 
+/**
+ * Kolone i redovi:
+ * TableModel   -> JTable
+ */
 public class ComplexTablePanel extends JPanel {
 
     private final JTable complexTable;
