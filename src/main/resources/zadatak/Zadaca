@@ -1,0 +1,20 @@
+Prepisati Player GUI koncept na sljedeći način:
+
+  1. Izmijeniti strukturu u bazi sports na način da
+    1.1 dodate dodatnu tabelu sports sa sljedećim kolonama
+        id, name, description
+    1.2 izmijeniti postojeću tabelu u tabeli players
+       na način da čuvate NE tesktualno NAZIV sporta nego DA ČUVATE FOREIGN key na Sport
+
+       id   name desc
+       1    Fudbal broj...
+       2    Košarska broj...
+
+       id name surname sport of_years vegetarian favourite_color
+       1  Alden Ome..  1      4         1        #sdnsjdn
+
+
+    Sport, SportDao
+
+
+

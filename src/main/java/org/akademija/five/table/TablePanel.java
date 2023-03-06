@@ -1,11 +1,14 @@
 package org.akademija.five.table;
 
+import org.akademija.six.gui.dao.Player;
+
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 import java.awt.*;
 import java.util.List;
+import java.util.Vector;
 import java.util.stream.Stream;
 
 /**
@@ -64,6 +67,10 @@ public class TablePanel extends JPanel {
                 {"Eldar", "Halilović", Sport.ŠAH.getName(), 12, false, Color.GRAY},
                 {"Eldar", "Pediša", Sport.ŠAH.getName(), 12, false, Color.YELLOW},
         };
+
+        private List<Player> playerData;
+
+
 
         @Override
         public int getRowCount() {
