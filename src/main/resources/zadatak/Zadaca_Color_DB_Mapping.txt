@@ -1,0 +1,10 @@
+
+    Učitati u PlayePanel komponenti tačnije u JTable komponenti boje na način
+    da u tabeli ne bude prikazana kao String nego kao JLabel obojena odgovarajućom
+    bojom definiranom u hexadecimalnom formatu.
+
+
+    hex vrijednost boje -> java.awt.Color -> setovati background one ćelije u toj boji da bude
+
+    promjena boje preko ColorChoosera treba da bude konvertovana u hex vrijednost -> String -> vraćamo nazad
+    

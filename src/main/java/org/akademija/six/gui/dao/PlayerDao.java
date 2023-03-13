@@ -5,9 +5,8 @@ import org.akademija.six.gui.dao.connection.ConnectionPool;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
-public class PlayerDao implements Dao<Player>{
+public class PlayerDao implements Dao<Player> {
     @Override
     public Player save(Player entity) {
         return null;
@@ -20,11 +19,11 @@ public class PlayerDao implements Dao<Player>{
         //1. konekcija s bazom
         Connection connection = ConnectionPool.getInstance().getConnection();
         //2. PreparedStatement ili Statement
-        try(PreparedStatement prepareStatement = connection.prepareStatement(sqlQuery)){
+        try (PreparedStatement prepareStatement = connection.prepareStatement(sqlQuery)) {
             //3. java.sql.Result
             //3.1 ResultSetMetada
             ResultSet resultSet = prepareStatement.executeQuery();
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 Player player = new Player();
                 player.setId(resultSet.getLong(1));
                 player.setName(resultSet.getString("name"));
@@ -35,31 +34,31 @@ public class PlayerDao implements Dao<Player>{
                 player.setFavouriteColor(resultSet.getString("favourite_color"));
                 players.add(player);
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
         ConnectionPool.getInstance().releaseConnection(connection);
         return players;
     }
 
-    public List<String> getColumnNames(){
+    public List<String> getColumnNames() {
         List<String> columnNames = new ArrayList<>();
         String sqlQuery = "SELECT * FROM players";
         //1. konekcija s bazom
         Connection connection = ConnectionPool.getInstance().getConnection();
         //2. PreparedStatement ili Statement
-        try(PreparedStatement prepareStatement = connection.prepareStatement(sqlQuery)){
+        try (PreparedStatement prepareStatement = connection.prepareStatement(sqlQuery)) {
             //3. java.sql.Result
             //3.1 ResultSetMetada
             ResultSet resultSet = prepareStatement.executeQuery();
             ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
             int columnCount = resultSetMetaData.getColumnCount();
-            for(int i = 1; i<=columnCount; i++){
+            for (int i = 1; i <= columnCount; i++) {
                 String columName = resultSetMetaData.getColumnName(i);
                 columnNames.add(columName);
             }
             ConnectionPool.getInstance().releaseConnection(connection);
-        }catch (SQLException e){
+        } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
 
@@ -71,13 +70,40 @@ public class PlayerDao implements Dao<Player>{
         return null;
     }
 
+    /**
+     * Single Responsibility
+     *
+     * @param player
+     * @return player
+     */
     @Override
-    public Player update(Player entity) {
-        System.out.println("Ovdje kući implementirajte update statement");
-        System.out.println("Promjen se desila nad");
-        System.out.println(entity);
-        return null;
+    public Player update(Player player) {
+        String sqlUpdate = """
+                 UPDATE players SET name = ?, 
+                 surname = ?, 
+                 sport = ?, 
+                 of_years = ?, 
+                 vegetarian = ?, 
+                 favourite_color = ? WHERE id = ?
+                 """;
+        Connection connection = ConnectionPool.getInstance().getConnection();
+        try(PreparedStatement preparedStatement = connection.prepareStatement(sqlUpdate)){
+            preparedStatement.setString(1, player.getName());
+            preparedStatement.setString(2, player.getSurname());
+            preparedStatement.setString(3, player.getSport());
+            preparedStatement.setInt(4, player.getOfYears());
+            preparedStatement.setBoolean(5, player.getVegetarian());
+            preparedStatement.setString(6, player.getFavouriteColor());
+            preparedStatement.setLong(7, player.getId());
+            preparedStatement.executeUpdate();
+        }catch (SQLException exception){
+            System.err.println(exception.getMessage());
+        }finally {
+            ConnectionPool.getInstance().releaseConnection(connection);
+        }
+        return player;
     }
+
 
     @Override
     public boolean delete(Player entity) {

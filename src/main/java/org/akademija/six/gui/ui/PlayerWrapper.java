@@ -5,6 +5,7 @@ import org.akademija.six.gui.dao.Player;
 public class PlayerWrapper {
     private final Player player;
 
+    //DI Dependency Injection
 
     public PlayerWrapper(Player player){
         this.player = player;
@@ -25,7 +26,7 @@ public class PlayerWrapper {
 
     public void setColumValue(int index, Object aValue){
         switch (index){
-            case 0: player.setId((Long)aValue);break;
+//            case 0: player.setId((Long)aValue);break;  -> Jako dobar komentar je da nema potrebe za case 0.Id je nepromjenjljivo
             case 1: player.setName((String)aValue);break;
             case 2: player.setSurname((String) aValue);break;
             case 3: player.setSport((String) aValue);break;
