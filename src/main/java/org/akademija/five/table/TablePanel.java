@@ -1,14 +1,12 @@
 package org.akademija.five.table;
 
-import org.akademija.six.gui.dao.Player;
+import org.akademija.six.gui.dao.player.Player;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableColumn;
-import javax.swing.table.TableModel;
 import java.awt.*;
 import java.util.List;
-import java.util.Vector;
 import java.util.stream.Stream;
 
 /**

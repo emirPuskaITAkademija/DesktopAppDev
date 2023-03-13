@@ -1,11 +1,14 @@
-package org.akademija.six.gui.dao;
+package org.akademija.six.gui.dao.player;
+
+import org.akademija.six.gui.dao.sport.Sport;
+import org.akademija.six.gui.dao.sport.SportDao;
 
 public class Player {
 
     private Long id;
     private String name;
     private String surname;
-    private String sport;
+    private Sport sport;
     private Integer ofYears;
     private Boolean vegetarian;
     private String favouriteColor;
@@ -13,7 +16,7 @@ public class Player {
     public Player() {
     }
 
-    public Player(Long id, String name, String surname, String sport, Integer ofYears, Boolean vegetarian, String color) {
+    public Player(Long id, String name, String surname, Sport sport, Integer ofYears, Boolean vegetarian, String color) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -47,11 +50,11 @@ public class Player {
         this.surname = surname;
     }
 
-    public String getSport() {
+    public Sport getSport() {
         return sport;
     }
 
-    public void setSport(String sport) {
+    public void setSport(Sport sport) {
         this.sport = sport;
     }
 

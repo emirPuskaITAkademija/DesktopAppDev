@@ -1,6 +1,9 @@
-package org.akademija.six.gui.dao;
+package org.akademija.six.gui.dao.player;
 
+import org.akademija.six.gui.dao.Dao;
 import org.akademija.six.gui.dao.connection.ConnectionPool;
+import org.akademija.six.gui.dao.sport.Sport;
+import org.akademija.six.gui.dao.sport.SportDao;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -15,7 +18,12 @@ public class PlayerDao implements Dao<Player> {
     @Override
     public List<Player> getAll() {
         List<Player> players = new ArrayList<>();
-        String sqlQuery = "SELECT * FROM players";
+        String sqlQuery = """
+                SELECT
+                p.id,name,surname,sport_name as sport, of_years, vegetarian, favourite_color
+                FROM players p
+                JOIN sport s ON p.sport=s.id;
+                """;
         //1. konekcija s bazom
         Connection connection = ConnectionPool.getInstance().getConnection();
         //2. PreparedStatement ili Statement
@@ -28,7 +36,17 @@ public class PlayerDao implements Dao<Player> {
                 player.setId(resultSet.getLong(1));
                 player.setName(resultSet.getString("name"));
                 player.setSurname(resultSet.getString("surname"));
-                player.setSport(resultSet.getString("sport"));
+                SportDao sportDao = new SportDao();
+                Sport sport = sportDao.getAll()
+                        .stream()
+                        .filter(s-> {
+                            try {
+                                return s.getSportName().equals(resultSet.getString("sport"));
+                            } catch (SQLException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }).findFirst().orElse(null);
+                player.setSport(sport);
                 player.setVegetarian(resultSet.getBoolean("vegetarian"));
                 player.setOfYears(resultSet.getInt("of_years"));
                 player.setFavouriteColor(resultSet.getString("favourite_color"));
@@ -90,7 +108,7 @@ public class PlayerDao implements Dao<Player> {
         try(PreparedStatement preparedStatement = connection.prepareStatement(sqlUpdate)){
             preparedStatement.setString(1, player.getName());
             preparedStatement.setString(2, player.getSurname());
-            preparedStatement.setString(3, player.getSport());
+            //preparedStatement.setString(3, player.getSport());
             preparedStatement.setInt(4, player.getOfYears());
             preparedStatement.setBoolean(5, player.getVegetarian());
             preparedStatement.setString(6, player.getFavouriteColor());

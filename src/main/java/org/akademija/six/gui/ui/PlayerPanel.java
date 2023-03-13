@@ -1,7 +1,9 @@
 package org.akademija.six.gui.ui;
 
-import org.akademija.six.gui.dao.Player;
-import org.akademija.six.gui.dao.PlayerDao;
+import org.akademija.six.gui.dao.player.Player;
+import org.akademija.six.gui.dao.player.PlayerDao;
+import org.akademija.six.gui.dao.sport.Sport;
+import org.akademija.six.gui.dao.sport.SportDao;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -14,7 +16,6 @@ import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -35,6 +36,7 @@ public class PlayerPanel extends JPanel {
      */
     private List<Player> players;
     private final PlayerDao playerDao = new PlayerDao();
+    private final SportDao sportDao = new SportDao();
     private final JTable playerTable;
 
     /**
@@ -64,13 +66,11 @@ public class PlayerPanel extends JPanel {
 
         //SPORT
         TableColumn sportColumn = playerTable.getColumnModel().getColumn(3);
-        JComboBox<String> sportComboBox = new JComboBox<>();
+        JComboBox<Sport> sportComboBox = new JComboBox<>();
         sportColumn.setCellEditor(new DefaultCellEditor(sportComboBox));
 
 
-        players.stream()
-                .map(Player::getSport)
-                .distinct()
+        sportDao.getAll()
                 .forEach(sportComboBox::addItem);
 
         JPanel searchForm = new JPanel(new GridLayout(1, 1));
